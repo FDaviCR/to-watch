@@ -5,8 +5,9 @@ export const ping = (req: Request, res: Response) => {
     res.json({pong: true});
 }
 
-export const all = (req: Request, res: Response) => {
-
+export const all = async (req: Request, res: Response) => {
+    const list = await Films.findAll();
+    res.json({list});
 }
 
 export const add = (req: Request, res: Response) => {
