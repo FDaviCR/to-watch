@@ -24,10 +24,37 @@ export const add = async (req: Request, res: Response) => {
     }
 }
 
-export const update = (req: Request, res: Response) => {
-    
+export const update = async (req: Request, res: Response) => {
+    const id: string = req.params.id;
+
+    let towatched = await Films.findByPk(id);
+    if(towatched){
+        if(req.body.title){
+            towatched.title = req.body.title;
+        };
+        if(req.body.watched){
+            switch(req.body.watched.toLowerCase()){
+                case 'true':
+                case '1':
+                    towatched.watched = true;
+                    break;
+                case 'false':
+                case '0':
+                    towatched.watched = false;
+                    break;
+            }
+        };
+        if(req.body.stars){
+            towatched.stars = req.body.stars;
+        };
+
+        await towatched.save();
+        res.json({ item: towatched });
+    }else{
+        res.json({ error: 'Item não encontrado.' });
+    }
 }
 
-export const remove = (req: Request, res: Response) => {
+export const remove = async (req: Request, res: Response) => {
     
 }
