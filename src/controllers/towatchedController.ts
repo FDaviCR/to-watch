@@ -56,5 +56,11 @@ export const update = async (req: Request, res: Response) => {
 }
 
 export const remove = async (req: Request, res: Response) => {
-    
+    const id: string = req.params.id;
+
+    let towatched = await Films.findByPk(id);
+    if(towatched){
+        await towatched.destroy();
+    }
+    res.json({});
 }
