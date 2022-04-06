@@ -1,1 +1,3 @@
-# to-watch
+# To Watch
+
+Projeto CRUD para estudos de Node com uso de Typescript.
